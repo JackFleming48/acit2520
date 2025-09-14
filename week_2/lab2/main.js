@@ -14,46 +14,28 @@ const input = process.argv.slice(2);
 function processInput(input, callback){
     fs.mkdir("dataPoints", { recursive: true }, (err) => {
         if (err) {
-            callback("error", null);
+            callback(err, null);
             return;
         }
-        callback(null, "dataPoints dir created.");
-    });
-
-    const arrToStr = input.join(" ");
-
+        console.log("data points created");
+        const arrToStr = input.join(" ");
     
-    fs.writeFile("dataPoints/points.txt", arrToStr, (err) => {
-        if (err) {
-            callback("error", null);
-            return;
-        };
         
-        const data = fs.readFile("dataPoints/points.txt", "utf-8", (err, data) => {
+        fs.writeFile("dataPoints/points.txt", arrToStr, (err) => {
             if (err) {
                 callback("error", null);
                 return;
             };
-            callback(null, "points have been written to points.txt");
+            
+         const calc = distance(input[0], input[1], input[2], input[3]);
 
-            const strToArr = data.split(" ");
-
-            const nums = [];
-
-            for (let index = 0; index < strToArr.length; index++) {
-                nums.push(parseInt(strToArr[index]));
-            };
-
-
-
-            const calc = distance(nums[0], nums[1], nums[2], nums[3])
-            fs.appendFile("dataPoints/points.txt", `\nThe distance between your two points: ${nums[0]}, ${nums[1]}, ${nums[2]}, ${nums[3]} is ${calc}`, (err) =>{
+         fs.appendFile("dataPoints/points.txt", `\nThe distance between your two points: ${input[0]}, ${input[1]}, ${input[2]}, ${input[3]} is ${calc}`, (err) =>{
                 if (err) {
                     callback("error", null);
                     return;
                 };
             });
-        });
+    });
     });
 };
 
