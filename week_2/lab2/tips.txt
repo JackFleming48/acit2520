@@ -1,0 +1,10 @@
+tip1
+tip2
+tip5
+tip3
+tip4
+tip7
+tip8
+tip6
+tip9
+tip10
