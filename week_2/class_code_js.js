@@ -135,22 +135,22 @@ multiplier("hello", 70, (err, result) => {
 
 // ARMAANS MODIFIED CODE 
 
-// function multiplier(num1, num2, callback) {
+function multiplier(num1, num2, callback) {
 
-//     if (typeof(num1)!== "number" || typeof num2 !== "number") {
+    if (typeof(num1)!== "number" || typeof num2 !== "number") {
 
-//         callback("ERROR", null);
-//     } else {
-//         callback(null, parseInt(num1) * parseInt(num2));
-//     }
+        callback("ERROR", null);
+    } else {
+        callback(null, parseInt(num1) * parseInt(num2));
+    }
 
-// }
+}
 
-// multiplier(4, 2.3, (err, result) => {
-//     if (err) {
-//         console.log(err);
-//     } else {
-//         console.log(result);
-//     }
-// });
+multiplier(4, 2.3, (err, result) => {
+    if (err) {
+        console.log(err);
+    } else {
+        console.log(result);
+    }
+});
 
