@@ -15,7 +15,7 @@ Streaming I/O
 - when we chain a promise to a function that does not return a promise (which normally happens), the code is not asynch!!!
   - Example, returning `str.split()` . In theory the .then chain should break because we haven't returned a promise
 - Why is the code still working?!?!?!?
-  - Because behind the scenes JS takes what you return and wraps it in `New Prommise((resolve, reject => resolve([]) ))`
+  - Because behind the scenes JS takes what you return and wraps it in `New Promise((resolve, reject => resolve([]) ))`
 - This can 'add up', promises are not cheap and they cost memory.
 - Rather than doing that we can:
   - Ask yourself, is the .then function doing something asynch? if yes continue if no:
