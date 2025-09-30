@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 hellohello
+=======
+jakkber,123
+adoh,hello
+>>>>>>> 4ee174ace2e1fb91021ded7aefc224af316c762b
