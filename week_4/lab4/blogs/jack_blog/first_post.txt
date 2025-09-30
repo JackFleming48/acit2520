@@ -1,0 +1,8 @@
+{
+  "likeCount": 2,
+  "likedBy": [
+    "jakkber",
+    "adoh"
+  ],
+  "content": "6th"
+}
