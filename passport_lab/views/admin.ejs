@@ -1,0 +1,28 @@
+<h2 class="mb-4">Active Sessions</h2>
+<table class="table table-bordered">
+  <thead class="table-dark">
+    <tr>
+      <th>Email</th>
+      <th>Session ID</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if (sessions.length === 0) { %>
+      <tr>
+        <td colspan="3" class="text-center text-muted">No active sessions</td>
+      </tr>
+    <% } %>
+    <% sessions.forEach(s => { %>
+      <tr>
+        <td><%= s.email || s.githubID %></td>
+        <td><%= s.sessionID %></td>
+        <td>
+          <form action="/admin/revoke/<%= s.sessionID %>" method="POST">
+            <button class="btn btn-danger btn-sm">Revoke</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
