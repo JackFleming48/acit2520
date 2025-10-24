@@ -28,15 +28,13 @@ const localStrategy = new LocalStrategy(
 );
 
 passport.serializeUser(function (user: IUser, done) {
-  done(null, user);
+  done(null, user.id);
 });
 
-passport.deserializeUser(function (user: IUser, done) {
-  if (user) {
-    done(null, user);
-  } else {
-    done({ message: "User not found" }, null);
-  }
+passport.deserializeUser(function (id: number, done) {
+  const user = getUserById(id)
+  if (!user) return done(null, false)
+    return done(null, user)
 });
 
 const passportLocalStrategy: PassportStrategy = {
