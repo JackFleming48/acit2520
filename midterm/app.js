@@ -4,9 +4,9 @@ async function viewAllSupply(coffeeType) {
     if ((await validTypes(coffeeType))) {
         console.error("invalid");
     }
-    const data = await fs.readFile("supply.txt", "utf-8")
-    const indexed = await data.split("\n").map(row => row.trim())
-    d = {}
+    const data = await fs.readFile("supply.txt", "utf-8");
+    const indexed = await data.split("\n").map(row => row.trim());
+    d = {};
     await indexed.forEach(element => {
         d[element] = (d[element] || 0 ) + 1;
     });
