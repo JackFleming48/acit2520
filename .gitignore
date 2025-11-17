@@ -3,3 +3,5 @@ dataFile/*
 /dataFile
 /blogs
 node_modules/
+node_modules
+.env
