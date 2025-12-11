@@ -46,3 +46,4 @@ export function remove(id: string): boolean {
   tips = tips.filter((t) => t.id !== id);
   return tips.length < before;
 }
+

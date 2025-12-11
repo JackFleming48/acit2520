@@ -26,29 +26,26 @@ app.post("/tips", async (req, res) => {
   // Even though your backend takes 4 seconds to insert the tip...
   // your frontend should still instantly display it when the user adds it.
   // This is the power of optimistic UI.
-  // await sleep(4000);
-  // ----------------------------------------------
-  // TODO: 🚀 Get incoming tip text from request body
-  // TODO: 🚀 Send it to addTip() function.
+  await sleep(4000);
+  // ----------------------------------------------.
+  addTip(req.body.text)
   res.status(200).json({ status: "success" });
 });
 
 // Like/Dislike/Delete
 app.post("/tips/:id/like", (req, res) => {
-  // TODO: 🚀 get id from url params
-  // TODO: 🚀 Send it to like() function
+  like(req.params.id);
   res.status(200).json({ status: "success" });
 });
 
 app.post("/tips/:id/dislike", (req, res) => {
-  // TODO: 🚀 get id from url params
-  // TODO: 🚀 Send it to dislike() function
+
+  dislike(req.params.id);
   res.status(200).json({ status: "success" });
 });
 
 app.post("/tips/:id/delete", (req, res) => {
-  // TODO: 🚀 get id from url params
-  // TODO: 🚀 Send it to delete() function
+  remove(req.params.id);
   res.status(200).json({ status: "success" });
 });
 

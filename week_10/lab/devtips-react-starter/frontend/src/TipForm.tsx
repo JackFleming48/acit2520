@@ -1,5 +1,5 @@
 // REMOVE THE COMMENT BELOW
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 
 import { useState } from "react";
 type Props = {
@@ -9,13 +9,13 @@ export default function TipForm({ onAddTip }: Props) {
   const [text, setText] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
-    // TODO1: Prevent the browser from reloading
-    // TODO2: Pass text to onAddTip for insertion
-    // TODO3: Wipe out form input by clearing text state
+    e.preventDefault()
+    onAddTip(text)
+    setText("")
   };
 
-  const handleChange = (e: React.ChangeEvent) => {
-    // TODO: get value from input event and set state
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setText(e.target.value);
   };
 
   return (

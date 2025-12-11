@@ -3,7 +3,7 @@ import Tip from "./Tip";
 import TipForm from "./TipForm";
 import { useEffect, useState } from "react";
 import { BASE_URL, type TTip } from "./util";
-
+ 
 function App() {
   const [tips, setTips] = useState<TTip[]>([]);
 
@@ -13,36 +13,68 @@ function App() {
     async function getTips() {
       const res = await fetch(`${BASE_URL}/tips`);
       const data = await res.json();
+      console.log(data)
       setTips(data);
     }
     getTips();
   }, []);
 
   // ----- Add Tip-------
-  const handleAddTip = (text: string) => {
-    // TODO: Create new tip and Add tip to end of tips list state (optimistically)
-    // TODO: fire off a mutation to the backend for persistence
+  const handleAddTip = async (text: string) => {
+    const newTip: TTip = {
+      id: crypto.randomUUID(),
+      text,
+      likes: 0
+    };
+    setTips((prev) => [...prev, newTip])
+    try {
+      await fetch(`${BASE_URL}/tips`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(newTip),
+      })
+    } catch (err) {
+      console.error("Failed to save new tip:", err)
+    };
     console.log("New Tip:", text);
   };
 
   // ----- Delete Tip-------
-  const handleDeleteTip = (id: string) => {
-    // TODO: Delete tip by id from list state(optimistically)
-    // TODO: fire off a mutation to the backend for persistence
+  const handleDeleteTip = async (id: string) => {
+    setTips((prev) => prev.filter((tip) => tip.id !== id));
+    try {
+      await fetch(`${BASE_URL}/tips/${id}/delete`, {
+        method: "POST"
+      })
+    } catch (err) {
+      console.error("Failed to delete the tip:", err)
+    }
     console.log(`🚀 Delete: ${id}`);
   };
 
   // ----- Like Tip-------
-  const handleLike = (id: string) => {
-    // TODO: Increase number of likes by 1
-    // TODO: fire off a mutation to the backend for persistence
+  const handleLike = async (id: string) => {
+    setTips((prev) => prev.map((tip) => tip.id === id ? {...tip, likes: tip.likes + 1}: tip))
+    try {
+      await fetch(`${BASE_URL}/tips/${id}/like`, {
+        method: "POST"
+        }) 
+      } catch (err) {
+        console.error("Failed to like the post", err)
+      }
     console.log(`🚀 Like: ${id}`);
   };
 
   // ----- Dislike Tip-------
-  const handleDislike = (id: string) => {
-    // TODO: Reduce number of likes by 1
-    // TODO: fire off a mutation to the backend for persistence
+  const handleDislike = async (id: string) => {
+    setTips((prev) => prev.map((tip) => tip.id === id ? {...tip, likes: tip.likes - 1}: tip))
+      try {
+    await fetch(`${BASE_URL}/tips/${id}/dislike`, {
+      method: "POST"
+      }) 
+    } catch (err) {
+      console.error("Failed to dislike the post", err)
+    }
     console.log(`🚀 Dislike: ${id}`);
   };
 
